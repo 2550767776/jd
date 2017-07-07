@@ -13,7 +13,31 @@
 
 	<body>
 		<div class="main_i">
-			<!--头部-->
+			<!--ad-->
+			<div class="top-ad">
+			<div class="img">
+				<img src="img/ad.jpg" alt="" />
+				<div class="xx">
+					<i class="fa fa-times" aria-hidden="true"></i>
+				</div>
+				<script>
+					//定时器。这个定时器只执行一次
+					setTimeout("showad()",3000);
+					function showad()
+					{
+						$('html,body').animate({scrollTop: '0px'}, 600);
+						$(".top-ad").slideDown();//显示，高度由0到本身高度
+					}
+					
+					$(".top-ad .xx").click(function(){
+						//$(".top-ad").css("display","none");
+						$(".top-ad").slideUp();
+					})
+					
+				</script>
+			</div>
+		</div>
+
 			<!--top start -->
 		<div class="top">
 			<div id="top">
@@ -1877,7 +1901,7 @@
 					</ul>
 				</div>
 				<div class="banner-box">
-					<div class="banner-img">
+					<div class="banner-img" onmouseover="stop()" onmouseout="start()">
 						<a href="#"><img src="img/banner1.jpg" alt="banner" id="bannerimg" /></a>
 						<div class="icon">
 							<a href="#" onmouseover="changeimg(0)" class="frist"></a>
@@ -1902,7 +1926,7 @@
 		$(".icon a").eq(num).css("background", "#db192a").siblings().css	("background", "#fff")
 		count = num;
 	}
-
+	
 	function left() {
 		count = count - 1;
 		if(count < 0) {
@@ -1928,7 +1952,9 @@
 	}
 
 	//设置一个定时器
-	setInterval('dingshi()', 3000);
+	var timeid=setInterval('dingshi()', 3000);
+	function stop(){clearInterval(timeid);}
+	function start(){setInterval('dingshi()', 3000);}
 	function dingshi() {
 		//调用右边方法
 		right();
@@ -2639,28 +2665,32 @@ window.setInterval(function(){ShowCountDown3(2017,9,20,'time3');}, interval);
 //						}else{
 //							$(".right-flot ul li").eq(0).css("background","#d70b1c").siblings().css("background","#918888");
 //						}
-						if($(window).scrollTop() <  $(".product1").offset().top){
+						if($(window).scrollTop() <=  $(".product1").offset().top){
 							$(".right-flot").css("display","none");
 						}
-						if($(window).scrollTop() >  $(".product1").offset().top){
+						if($(window).scrollTop() >=  $(".product1").offset().top){
 							$(".right-flot").css("display","block");
 						}
-						if($(window).scrollTop() >  $(".product2").offset().top){
+						if($(window).scrollTop() >=  $(".product2").offset().top){
 							$(".right-flot ul li").eq(0).css("background","#d70b1c").siblings().css("background","#918888");
 						}
-						if($(window).scrollTop() >  $(".product4").offset().top){
+						if($(window).scrollTop() >=  $(".product4").offset().top){
 							$(".right-flot ul li").eq(1).css("background","#d70b1c").siblings().css("background","#918888");
 						}
-						if($(window).scrollTop() >  $(".hmgg").offset().top){
+						if($(window).scrollTop() >=  $(".hmgg").offset().top){
 							$(".right-flot ul li").eq(2).css("background","#d70b1c").siblings().css("background","#918888");
 						}
 						
 					});
+					
 					$(".right-flot ul li").click(function(){
 						var i=$(this).index();
-//						if(i=0){ $('html,body').animate({scroll: $(".product2").offset()}, 800);}
-//						if(i=1){ $('html,body').animate({scroll: $(".product4").offset()}, 800);}
-						if(i=11){ $('html,body').animate({scrollTop: '0px'}, 800);}
+						if(i==0){ $('html,body').animate({scrollTop: $(".product2").offset().top}, 200);
+							$(".right-flot ul li").eq(0).css("background","#d70b1c").siblings().css("background","#918888");
+						}
+						if(i==1){ $('html,body').animate({scrollTop: $(".product4").offset().top}, 200);$(".right-flot ul li").eq(1).css("background","#d70b1c").siblings().css("background","#918888");}
+						if(i==2){ $('html,body').animate({scrollTop: $(".hmgg").offset().top}, 200);$(".right-flot ul li").eq(2).css("background","#d70b1c").siblings().css("background","#918888");}
+						if(i==11){ $('html,body').animate({scrollTop: '0px'}, 200);}
 						
 					});
 				</script>
